@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Crusty Vella - Best Bakers</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!--carousel-->
+    
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- <link rel="stylesheet" href="./css/searchbar.css"> -->
+
+    <!--cart link-->
+    <link rel="stylesheet" href="./css/cart.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+
+
+    <!--Float btn-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
+</head>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+     $('.radio-group .radio').click(function(){
+         $('.radio').addClass('gray');
+         $(this).removeClass('gray');
+     });
+
+     $('.plus-minus .plus').click(function(){
+         var count = $(this).parent().prev().text();
+         $(this).parent().prev().html(Number(count) + 1);
+     });
+
+     $('.plus-minus .minus').click(function(){
+         var count = $(this).parent().prev().text();
+         $(this).parent().prev().html(Number(count) - 1);
+     });
+
+    });
+</script>
+
+
+
+<style>
+
+
+
+    .float{
+        position:fixed;
+        width:60px;
+        height:60px;
+        bottom:40px;
+        right:40px;
+        background-color:#25d366;
+        color:#FFF;
+        border-radius:50px;
+        text-align:center;
+      font-size:30px;
+        box-shadow: 2px 2px 3px #999;
+      z-index:100;
+    }
+    
+    .my-float{
+        margin-top:16px;
+    }
+    </style>
+    
+
+<body>
+
+
+    
+
+<!--Float btn-->
+<a href="https://api.whatsapp.com/send?phone=+03480279669&amp;text=Hi there! I want to ask ." class="float" target="_blank">
+    <i class="fa fa-whatsapp my-float"></i>
+  </a>
+  
+
+<a href="./product.html"><img src="img/back.png" style="margin-left:25px ; margin-top:20px;" width="50px" height="50px"></a>
+
+<h1 class="display-6 mb-4 " style="text-align:center; font-family:sans-serif; font-size:xx-large"> Products</h1>
+     
+
+    <div class="container px-4 py-5 mx-auto cont5">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div id="show_element" class="row"></div>
+            </div>
+        </div>
+    </div>
+
+
+  
+   
+
+
+      <script type="text/javascript">
+     
+
+     var old_data1 = JSON.parse(localStorage.getItem('fname'));
+     var old_data2 = JSON.parse(localStorage.getItem('fprice'));
+     var old_data3 = JSON.parse(localStorage.getItem('fimage'));
+
+    for(var i = 0;i<old_data1.length;i++ ){
+        //console.log(old_data1[i]);
+        document.getElementById("show_element").innerHTML+="<div class='col-sm-4'><div class='card' style='width: 18rem;height:26rem;'><img class='card-img-top' src='"+old_data3[i]+"' alt='Card image cap'><div class='card-body'><h5 class='card-title'>"+old_data1[i]+"</h5><p class='card-text'>"+old_data2[i]+"</p></div><button class='remo' onclick='removeCartItem($(item.productId))'>Remove</button></div></div>";
+
+
+         
+
+        
+    }
+
+
+     
+
+    </script>
+
+
+
+</body>
+</html>

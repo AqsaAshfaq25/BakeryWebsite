@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/form.css">
+  <link rel="stylesheet" href="https://www.quackit.com/html/codes/html_link_code.cfm">
+  <!-- <link rel="stylesheet" href="./from.jq"> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:300,600" rel="stylesheet">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order Form</title>
+</head>
+<script>
+  $(document).ready(function () {
+    "use strict";
+
+    var usernameError = true,
+      emailError = true,
+      telError = true,
+      DevAddError = true;
+
+    // Detect browser for css purpose
+    // if (navigator.userAgent.toLowerCase().indexOf("firefox") > -1) {
+    //   $(".form form label").addClass("fontSwitch");
+    // }
+
+    // Label effect
+    $("input").focus(function () {
+      $(this).siblings("label").addClass("active");
+    });
+
+    // Form validation
+    $("input").blur(function () {
+      // User Name
+      if ($(this).hasClass("name")) {
+        if ($(this).val().length === 0) {
+          $(this)
+            .siblings("span.error")
+            .text("Please type your full name")
+            .fadeIn()
+            .parent(".form-group")
+            .addClass("hasError");
+          usernameError = true;
+        }
+        // else if ($(this).val().length > 1 && $(this).val().length <= 6) {
+        //   $(this)
+        //     .siblings("span.error")
+        //     .text("Please type at least 6 characters")
+        //     .fadeIn()
+        //     .parent(".form-group")
+        //     .addClass("hasError");
+        //   usernameError = true;
+        // } 
+        else {
+          $(this)
+            .siblings(".error")
+            .text("")
+            .fadeOut()
+            .parent(".form-group")
+            .removeClass("hasError");
+          usernameError = false;
+        }
+      }
+      // Email
+      if ($(this).hasClass("email")) {
+        if ($(this).val().length == "") {
+          $(this)
+            .siblings("span.error")
+            .text("Please type your email address")
+            .fadeIn()
+            .parent(".form-group")
+            .addClass("hasError");
+          emailError = true;
+        } else {
+          $(this)
+            .siblings(".error")
+            .text("")
+            .fadeOut()
+            .parent(".form-group")
+            .removeClass("hasError");
+          emailError = false;
+        }
+      }
+
+      // PhoneNumber
+      if ($(this).hasClass("phone")) {
+        if ($(this).val().length == "") {
+          $(this)
+            .siblings("span.error")
+            .text("Please type your valid nummber")
+            .fadeIn()
+            .parent(".form-group")
+            .addClass("hasError");
+          telError = true;
+        } else {
+          $(this)
+            .siblings(".error")
+            .text("")
+            .fadeOut()
+            .parent(".form-group")
+            .removeClass("hasError");
+          telError = false;
+        }
+      }
+
+      // ADDRESS
+      if ($(this).hasClass("DevAdd")) {
+        if ($(this).val().length == "") {
+          $(this)
+            .siblings("span.error")
+            .text("Please type your Home Address")
+            .fadeIn()
+            .parent(".form-group")
+            .addClass("hasError");
+          DevAddError = true;
+        } else {
+          $(this)
+            .siblings(".error")
+            .text("")
+            .fadeOut()
+            .parent(".form-group")
+            .removeClass("hasError");
+          DevAddError = false;
+        }
+      }
+     
+
+      // PassWord confirmation
+      // if ($(".pass").val() !== $(".passConfirm").val()) {
+      //   $(".passConfirm")
+      //     .siblings(".error")
+      //     .text("Passwords don't match")
+      //     .fadeIn()
+      //     .parent(".form-group")
+      //     .addClass("hasError");
+      //   passConfirm = false;
+      // } else {
+      //   $(".passConfirm")
+      //     .siblings(".error")
+      //     .text("")
+      //     .fadeOut()
+      //     .parent(".form-group")
+      //     .removeClass("hasError");
+      //   passConfirm = false;
+      // }
+
+      // label effect
+      if ($(this).val().length > 0) {
+        $(this).siblings("label").addClass("active");
+      } else {
+        $(this).siblings("label").removeClass("active");
+      }
+    });
+
+    // form switch
+    $("a.switch").click(function (e) {
+      $(this).toggleClass("active");
+      e.preventDefault();
+
+      if ($("a.switch").hasClass("active")) {
+        $(this)
+          .parents(".form-peice")
+          .addClass("switched")
+          .siblings(".form-peice")
+          .removeClass("switched");
+      } else {
+        $(this)
+          .parents(".form-peice")
+          .removeClass("switched")
+          .siblings(".form-peice")
+          .addClass("switched");
+      }
+    });
+
+    // Form submit
+    $("form.signup-form").submit(function (event) {
+      event.preventDefault();
+
+      if (
+        usernameError == true ||
+        emailError == true ||
+        telError == true ||
+        DevAddError == true
+      ) {
+        $(".name, .email, .phone, .DevAdd").blur();
+      } else {
+        $(".signup, .login").addClass("switched");
+
+        setTimeout(function () {
+          $(".signup, .login").hide();
+        }, 700);
+        setTimeout(function () {
+          $(".brand").addClass("active");
+        }, 300);
+        setTimeout(function () {
+          $(".heading").addClass("active");
+        }, 600);
+        setTimeout(function () {
+          $(".success-msg p").addClass("active");
+        }, 900);
+        setTimeout(function () {
+          $(".success-msg a").addClass("active");
+        }, 1050);
+        setTimeout(function () {
+          $(".form").hide();
+        }, 700);
+      }
+    });
+
+    // Reload page
+    $("a.profile").on("click", function () {
+      location.reload(true);
+    });
+  });
+</script>
+
+<body>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
+
+  <section id="formHolder">
+
+    <div class="row">
+
+      <!-- Brand Box -->
+      <div class="col-sm-6 brand">
+        <a href="./index.html" class="logo">CV <span>.</span></a>
+
+        <div class="heading">
+          <h2>Crusty Vella</h2>
+          <p>Your Right Choice</p>
+        </div>
+
+        <div class="success-msg">
+          <p>Great! You are one of our Customer now</p>
+          <a href="./paymentPage.html" class="profile"><b>Pay Bill</b></a>
+        </div>
+      </div>
+
+      <!-- Form Box -->
+      <div class="col-sm-6 form">
+
+        <!-- Login Form -->
+        <div class="login form-peice switched order-form">
+          <h5 style="text-align: center;color:black;font-size:xx-large;margin-top: 2%;">Order Detail</h5>
+          <h class="main-hd"><b>Type Of Product:</b></h>
+          <select id="product">
+            <option value="Product" disabled selected>Select Product</option>
+            <option value="Cookies">Cookies</option>
+            <option value="Cakes">Cakes</option>
+            <option value="Donuts">Donuts</option>
+            <option value="Shakes">Shakes</option>
+            <option value="Breads">Breads</option>
+            <option value="Macarons">Macarons</option>
+          </select><br><br>
+          <h class="main-hd"><b>Quantity Of Product:</b></h>
+          <input type="number" size="5">
+          <br><br>
+          <h class="main-hd"><b>Event Type:</b></h><br>
+          <div class="check-box">
+            <label id="check"><input type="checkbox" name="checkbox"><i></i> Wedding / Aniversary</label> 
+          </div>
+          <!-- <div class="check-box" >
+            <label id="check_box" style="float: left;"><input type="checkbox" name="checkbox" ><i></i> Aniversary</label>
+          </div> -->
+          <div class="check-box">
+            <label id="check"><input type="checkbox" name="checkbox"><i></i> Birthday</label> 
+          </div>
+          <div class="check-box">
+            <label id="check_box"><input type="checkbox" name="checkbox" ><i></i> Graduation</label>
+          </div>
+          <div class="check-box">
+            <label id="check"><input type="checkbox" name="checkbox" checked><i></i> No event</label> 
+          </div>
+          <div class="check-box">
+            <label id="check_box"><input type="checkbox" name="checkbox" ><i></i> <input type="text" placeholder="other" class="text" size="5"></label>
+          </div>
+          <br>
+          <div class="main-hd"><b> Type Of Order:</b></div>
+          <div class="radio"> <label><input type="radio" name="radio" checked="Delivery"><i></i>Delivery</label> </div><br>
+          <div class="radio"> <label><input type="radio" name="radio"><i></i>PickUp</label> </div><br>
+          <!-- <input type="radio" name="order" value="Other"><input type="text" placeholder="other"> -->
+          <div class="radio"> <label><input type="radio" name="radio"><i></i><input type="text" placeholder="other" class="text" size="5"></label> </div>
+          <br>
+          <h class="main-hd"><b>Pick-Up/Delivery Date:</b></h>
+          <input type="date" name="text" placeholder="mm-dd-yyyy"><br>
+          <label class="date" for="date">Date</label><br><br>
+
+          <h class="main-hd"><b>Pick-Up/Delivery Time:</b></h>
+          <input type="time" name="time" oninput="result.value = send.value"><br>
+          <label class="date" for="date">Time</label><br>
+          
+          <p class="text1" style="margin-left: 150px;font-size:89%;color: rgb(56, 56, 56) ;"><b>Do you have any additional information OR instructions?</b></p> 
+          <textarea name="Instruction"  cols="60" rows="5" placeholder="Type Here..." style="margin-left: 150px;font-size: medium;"></textarea>
+          <form class="login-form" action="#" method="post">
+            <!-- <div class="form-group">
+                    Type Of Order
+                    <input type="radio" name="loginemail" id="loginemail" required>Delivery
+                    <input type="radio" name="loginemail" id="loginemail" required>PickUp
+                    <input type="radio" name="loginPassword" id="loginPassword" required placeholder="Other">
+                  </div>
+      
+                  <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" name="loginPassword" id="loginPassword" required>
+                  </div>--->
+
+            <div class="CTA signup-form">
+              <!-- <a href="./paymentPage.html" id="submit">Pay Bill</a> -->
+              <a href="#" class="switch btn">Back</a>
+            </div>
+          </form>
+        </div> <!-- End Login Form -->
+
+        <!-- Signup Form -->
+        <div class="signup form-peice">
+          <h5 style="text-align: center;color:black;font-size:xx-large;margin-top: 0.1%;">Customer Detail</h5>
+          
+          <form class="signup-form" action="#" method="post"><br><br>
+
+            <div class="form-group" style="margin-top: 10%;">
+              <h class="main-hd" style="margin-left: 0.1px;"><b>Customer's Name:</b></h>
+              <input type="text" name="username" id="name" class="name" size="0.3" style="color: black;margin-left:4%;">
+              <input type="text" name="username" id="name" class="name" style="color: black;margin-left:4%;width: 30%;">
+              <label class="date" for="date" style="margin-left:36%;">First Name</label>
+              <label class="date" for="name" style="margin-left:10%;">Last Name</label>
+              <!-- <label for="name">First Name</label>
+              <input type="text" name="username" id="name" class="name" size="9">  <label for="name">Last Name</label><input type="text" name="username" id="name" class="name" size="9"> -->
+              <span class="error"></span>
+            </div><br>
+
+            <div class="form-group">
+              <h class="main-hd" style="margin-left: 0.1px;"><b>Customer's Email:</b></h>
+              <!-- <label for="email">Email Adderss</label> -->
+              <input type="email" name="emailAdress" id="email" class="email" style="margin-left:4%;width:50%;">
+              <label class="date" for="email" style="margin-left:35%;">example@example.com</label>
+              <span class="error"></span>
+            </div><br>
+            
+            <div class="form-group">
+              <!-- <div class="phonenumber"> -->
+                <h class="main-hd" style="margin-left: 0.1px;"><b>Customer's Phone-Number:</b></h>
+                <select id="AreaCode" onchange="Area_Code()" style="margin-left: 2%;width: 15%;">
+                  <option value="Select Area Code" disabled selected></option>
+                  <option value="PAK">&#x1F1F5;&#x1F1F0; PAK</option>
+                  <option value="UK">&#x1F1EC;&#x1F1E7; UK</option>
+                  <option value="TUR">&#x1F1F9;&#x1F1F7;  TUR</option>
+                  <option value="SA">&#x1F1F8;&#x1F1E6;  SA</option>
+                </select> 
+                - <input type="tel" name="tel" id="output" style="width:30%;" placeholder="Phone Number" class="phone">
+                <label class="CODE" for="date" style="margin-left:50%;">Area Code</label>
+                <!-- <label class="Number" for="name" style="margin-left:5%;">Phone Number</label> -->
+                <!-- <div class="phone" style="margin-left: 15rem;"></div> -->
+              <!-- </div> -->
+
+              <!-- <label for="password">Password</label>
+              <input type="password" name="password" id="password" class="pass"> -->
+              <span class="error"></span>
+            </div><br>
+
+            <!-- <div class="form-group">
+                    <label for="orde type">order type</label>
+                    <label id="label_input_15_0" for="input_15_0"> Delivery </label>
+                    <input type="radio" name="password" id="password" class="pass">
+                    <span class="error"></span>
+                  </div> -->
+
+            <div class="form-group">
+              <h class="main-hd" style="margin-left: 0.1px;"><b>Delivery Address:</b></h>
+              <!-- <label for="email">Email Adderss</label> -->
+              <input type="text" name="Street" id="line-1" class="DevAdd" style="margin-left:4%;width:62%;">
+              <label class="Street" for="Street" style="margin-left:35%;">Street Address</label><br><br>
+              <!-- <input type="text" name="Street" id="line-2" class="line_2" style="margin-left:34%;width:62%;">
+              <label class="line2" for="Street" style="margin-left:35%;">Street Address Line 2</label><br><br> -->
+
+              <input type="text" name="City" id="city" class="DevAdd" style="margin-left:34%;width:22%;">
+              <input type="text" name="Province" id="state" class="DevAdd" style="margin-left:2%;width:32%;">
+              <label class="city" for="city" style="margin-left:35%;">City</label>
+              <label class="state" for="state" style="margin-left:20%;">State /  Province</label><br><br>
+
+              <input type="text" name="Street" id="line-1" class="DevAdd" style="margin-left:34%;width:35%;">
+              <label class="Street" for="Street" style="margin-left:35%;">Postal / Zip Code</label>
+             
+              <!-- <label for="passwordCon">Confirm Password</label>
+              <input type="password" name="passwordCon" id="passwordCon" class="passConfirm"> -->
+              <span class="error"></span>
+            </div><br>
+           
+            <p class="text1" style="font-size:73%;color: rgb(56, 56, 56) ;"><b>Would you like to write a message? If yes, please enter the message below:</b></p> 
+            <textarea name="Instruction"  cols="60" rows="5" placeholder="Type Here..." style="font-size: medium;"></textarea>
+             <p style="font-size: small;"><b>Important Reminders:</b></p>
+             <p class="text1" style="font-size:84%;color: rgb(22, 22, 22) ;">After submitting this form. we'll check  your order and we'll contact you within 24-28 hours for confirmation.The trun around time dpends on the ordered items. Taxes and Shipping fee will be applied for every order. Kindly click on the <b>"next button"</b> for order detail.</p> 
+
+            
+            <div class="CTA" style="margin-bottom: 5.8%;">
+              <input type="submit" value="Order Now" id="submit">
+              <a href="#" class="switch">Next</a>
+            </div>
+          </form>
+          
+
+        </div><!-- End Signup Form -->
+      </div>
+    </div>
+
+  </section>
+
+<script>
+  function Area_Code(){
+    var val = document.getElementById("AreaCode").value;
+
+    if (val === "Select Area Code"){
+      document.getElementById("output").value = "";
+    }
+    else if (val === "PAK"){
+      document.getElementById("output").value = "+92";
+    }
+    else if (val === "UK"){
+      document.getElementById("output").value = "+44";
+    }
+    else if (val === "TUR"){
+      document.getElementById("output").value = "+90";
+    }
+    else if (val === "SA"){
+      document.getElementById("output").value = "+966";
+    }
+  }
+</script>
+</body>
+
+</html>
